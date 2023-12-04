@@ -1,9 +1,7 @@
 const fs = require('fs');
 const pdf = require('pdf-parse');
 const {createDirectoryIfNotExists, getFileNameFromPath} = require("../helpers/fileSystem");
-const { PROJECT_ROOT_DIR } = require("../constants");
-
-const PDF_PARSE_TEMP_DIR_PATH = PROJECT_ROOT_DIR + '/data/pdf/temp/';
+const { PDF_PARSE_TEMP_DIR_PATH } = require("../constants");
 
 module.exports = {
     parse: (filePath) => {
@@ -16,7 +14,7 @@ module.exports = {
             createDirectoryIfNotExists(PDF_PARSE_TEMP_DIR_PATH);
 
             // write pdf text to text file.
-            const tempFileName = PDF_PARSE_TEMP_DIR_PATH + getFileNameFromPath(filePath) + '.temp';
+            const tempFileName = PDF_PARSE_TEMP_DIR_PATH + getFileNameFromPath(filePath).join('.') + '.temp';
 
             fs.writeFile(tempFileName, data.text.trim(), (err) => {
                 if (err) {
